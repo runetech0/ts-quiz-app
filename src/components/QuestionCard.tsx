@@ -40,7 +40,7 @@ const useStyles = makeStyles({
         backgroundColor: '#92817a',
         borderRadius: '10px',
         '&:hover': {
-            backgroundColor: '#9b817d'
+            backgroundColor: '#9b8174'
         }
     },
     greenButton: {
