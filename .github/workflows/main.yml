@@ -32,7 +32,7 @@ jobs:
         
       
       - name: Install surge
-        run: npm i -g surge
+        run: sudo npm i -g surge
         
       - name: Creating production build
         run: npm run build
