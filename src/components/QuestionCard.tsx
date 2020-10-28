@@ -23,7 +23,9 @@ const useStyles = makeStyles({
     root: {
         // minWidth: 275,
         maxWidth: 400,
-        margin: 'auto'
+        margin: 'auto',
+        backgroundColor: '#8db596',
+        borderRadius: '20px'
     },
     answers: {
         display: 'block'
@@ -34,10 +36,47 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    button: {
+        backgroundColor: '#92817a',
+        borderRadius: '10px',
+        '&:hover': {
+            backgroundColor: '#9b817d'
+        }
+    },
+    greenButton: {
+        backgroundColor: '#158467',
+        borderRadius: '10px',
+        '&:hover': {
+            backgroundColor: '#158411'
+        }
+    },
+    redButton: {
+        backgroundColor: '#d54062',
+        borderRadius: '10px',
+        '&:hover': {
+            backgroundColor: '#d54022'
+        }
+    }
+
 });
+
+
 
 export const QuestionCard: React.FC<Props> = ({ question, answers, callback, userAnswer, questionNumber, totalQuestions, buttonsState }) => {
     const classes = useStyles();
+    const buttonClass = (disabled: boolean, currentAnswer: string) => {
+        if (disabled) {
+            const correctAnswer = userAnswer.correctAnswer
+            const selectedAnswer = userAnswer.selectedAnswer
+            if (currentAnswer === correctAnswer) {
+                return classes.greenButton
+            }
+            if (currentAnswer === selectedAnswer) {
+                return classes.redButton
+            }
+        }
+        return classes.button
+    }
     return (
         <div className={classes.main}>
             <Card className={classes.root} variant="outlined">
@@ -52,7 +91,7 @@ export const QuestionCard: React.FC<Props> = ({ question, answers, callback, use
                 {answers.map((answer, index) => (
                     <CardActions key={index} className={classes.answers}>
                         <div>
-                            <Button disabled={buttonsState} onClick={callback} variant='contained' fullWidth>{answer}</Button>
+                            <Button className={buttonClass(buttonsState, answer)} onClick={!buttonsState ? callback : () => { }} variant='contained' fullWidth>{answer}</Button>
                         </div>
                     </CardActions>
                 ))}

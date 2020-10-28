@@ -6,11 +6,26 @@ import { QuestionCard } from './components/QuestionCard'
 import { fetchQuestions, Difficulty, finalQuestion } from './components/API'
 
 
+
+const sansSerif = "'Open Sans', sans-serif";
+const cursive = "'Concert One', cursive";
+
 const styles = makeStyles({
   startButton: {
-    marginTop: '50px'
+    marginTop: '20px',
+    borderRadius: '7px',
+    backgroundColor: '#84a9ac',
+    fontFamily: sansSerif,
+    '&:hover': {
+      backgroundColor: '#84a9ee',
+    }
+  },
+  h1: {
+    fontSize: '4em',
+    fontFamily: cursive
   }
 })
+
 
 const TOTAL_QUESTIONS = 10;
 
@@ -79,7 +94,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Quiz App</h1>
+      <h1 className={classes.h1}>React Quiz App</h1>
       {!loading && !gameOver &&
         <h3>Score : {score}</h3>
       }
@@ -92,7 +107,7 @@ function App() {
         !gameOver && buttonsDisabled && <Button className={classes.startButton} variant='outlined' onClick={nextQuiz}>Next</Button>
       }
       {gameOver &&
-        <Button className={classes.startButton} variant='outlined' onClick={startQuiz}>Start Quiz</Button>
+        <Button className={`${classes.startButton}`} variant='outlined' onClick={startQuiz}>Start Quiz</Button>
       }
     </div>
   );
